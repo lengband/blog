@@ -100,7 +100,10 @@ theme: melody
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
-  type: ''
+  type: git
+  repo: git@39.100.192.160:/home/git/blog.git
+  branch: master
+  message:
 
 algolia:
   applicationID: '0QYD87NZ41'
