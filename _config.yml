@@ -103,7 +103,7 @@ deploy:
   type: git
   repo: git@39.100.192.160:/home/git/blog.git
   branch: master
-  message:
+  message: test
 
 algolia:
   applicationID: '0QYD87NZ41'
