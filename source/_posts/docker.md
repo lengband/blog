@@ -4,7 +4,7 @@ date: 2020-05-04 14:29:46
 tags: Linux 容器
 ---
 
-## 安装 Docker
+# 安装 Docker
 * Mac
 https://docs.docker.com/docker-for-mac/install/
 
@@ -57,11 +57,19 @@ sudo systemctl start docker
 sudo docker run hello-world
 ```
 
-## docker命令
+# 普通用户下docker命令去掉sudo
+1、创建用户组（已经存在）
+`sudo groupadd docker`
+2、把当前用户添加到`docker`组里面
+`sudo gpasswd -a <username> docker`
+3、重启docker进程
+`sudo service docker restart`
+4、重启机器并重新登录
+
+# docker命令
 `docker` 常用 `docker <Management Command> <Command> <Optional?ID>`
 
-
-### docker-machine
+## docker-machine
 docker-machine create demo 快速新建一台装有docker的linux机器
 docker-machine stop demo 关机demo
 docker-machine ls 列出机器
@@ -71,10 +79,8 @@ docker-machine env demo 查看demo环境变量
 切换server
 {% asset_img docker-machine_env.png 切换server %}
 
-
 恢复server
 {% asset_img docker-machine_env_unset.png 恢复server %}
-
  
 #### docker-machine 常用命令
 最后说一下常用命令把，其实也没什么好讲的，都在help里面有，下面都是docker-machine后加的命令就是docker-machine command
@@ -102,14 +108,14 @@ url 获取主机的 URL
 version 输出 docker-machine 版本信息
 help 输出帮助信息
 
-###### 注意简写
+**注意简写**
 `docker rm xxx` 默认是删除container，如果想要删除镜像执行 `docker rmi xxx`
 `docker container commit` = `docker commit`
 `docker image build` = `docker build`
 `docker image push` = `docker push`
 
 
-###### 组合用法
+### 组合用法
 > `-q`相当于一个语法糖，例如 `docker rm $(docker container ls -aq)` = `docker rm $(docker container ls -a | awk {'print$1'})`
 
 1、删除全部containers
@@ -117,31 +123,22 @@ help 输出帮助信息
 2、删除退出状态的containers
 `docker rm $(docker container -f "status=exited" -q)`
 
-### 普通用户下docker命令去掉sudo
-1、创建用户组（已经存在）
-`sudo groupadd docker`
-2、把当前用户添加到`docker`组里面
-`sudo gpasswd -a <username> docker`
-3、重启docker进程
-`sudo service docker restart`
-4、重启机器并重新登录
-
-### Dockerfile
-#### RUN & CMD & ENTERPOINT
+## Dockerfile
+### RUN & CMD & ENTERPOINT
 RUN: 执行命令并创建新的Image Layer
 CMD: 设置容器启动后默认执行的命令和参数
 ENTERPOINTER: 设置容器启动时运行的命令
-###### CMD
+#### CMD
 容器启动时默认执行的命令
 如果 `docker run` 指定了其他命令，CMD命令被忽略
 如果定义了多个CMD，只有最后一个会执行
-##### ENTERPOINT
+#### ENTERPOINT
 让容器以应用程序或则服务的形式运行
 不会被忽略，一定会执行
 最佳实践：写一个shell脚本最为enterpoint
 
 
-##### 容器之间的link
+# 容器之间的link
 > 容器启动失败可以使用命令 `docker logs <container>`查看原因
 
 在下面的命令中，test2能ping通172.17.3(test1的IP)，同时也能ping通test1(docker内部加了类似DNS的处理)，走的是默认网络bridge，反之test1仅能ping通172.17.2(test2的IP)，不能ping通test2。
@@ -162,12 +159,12 @@ ENTERPOINTER: 设置容器启动时运行的命令
 `docker network inspect my-bridge`查看链接进来的container就会发现两个container
 4、这样test2和test3就是互通的了，其中test2即链接到默认的`bridge`和自建的网络`my-bridge`
 
-##### 容器端口映射
+## 容器端口映射
 举例，创建一个`nginx`容器，想要把本地80端口映射到容器里面的80端口
 `docker run --name web -d -p 80:80 nginx`
 
 
-##### 多容器复杂应用的部署
+# 多容器复杂应用的部署
 先看一下程序，和 redis 组合使用
 app.py
 ```python
@@ -220,6 +217,6 @@ Hello Container World! I have been seen 3 times and my hostname is 3573f2231c28.
 如果没有浏览器，也可执行 `curl 127.0.0.1:5000`，进行验证
 
 
-#### 部署一个workpress
+## 部署一个workpress
 1、` docker run -d --name mysql -v mysql-data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=wordpress mysql`
 2、` docker run -d -e WORDPRESS_DB_HOST=mysql:3306 --link mysql -p 8080:80 wordpress`
