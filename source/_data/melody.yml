@@ -135,7 +135,8 @@ cdn:
 # ---------------
 avatar: https://s1.ax1x.com/2020/05/04/Y9vLxs.jpg
 
-top_img: https://s1.ax1x.com/2020/05/04/Y9H5hn.jpg # false or url of img
+# top_img: https://s1.ax1x.com/2020/05/04/Y9H5hn.jpg # false or url of img
+top_img: http://cdn.lengband.wang/yasuo.jpg # false or url of img
 
 top_img_height: 60 # best range: 60 - 100
 
