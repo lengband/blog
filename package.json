@@ -7,7 +7,7 @@
     "clean": "hexo clean",
     "deploy": "hexo deploy",
     "server": "hexo server",
-    "deploy:wpa": "yarn clean && yarn build && scp -r .deploy_git/* root@39.100.192.160:/home/www/website"
+    "deploy:wpa": "yarn clean && yarn build && scp -r ./public/* root@39.100.192.160:/home/www/website"
   },
   "hexo": {
     "version": "4.2.0"
