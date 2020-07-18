@@ -6,7 +6,7 @@
     "build": "hexo generate",
     "clean": "hexo clean",
     "deploy": "hexo deploy",
-    "server": "hexo server",
+    "serve": "hexo server",
     "deploy:wpa": "yarn clean && yarn build && scp -r ./public/* root@39.100.192.160:/home/www/website"
   },
   "hexo": {

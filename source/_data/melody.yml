@@ -246,7 +246,7 @@ since: 2020
 
 ICP:
   enable: true
-  text: 京ICP备20012452号-1
+  text: 京ICP备20012452号
 
 # busuanzi count for PV / UV in site
 busuanzi:
