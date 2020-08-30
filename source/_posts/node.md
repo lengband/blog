@@ -1,5 +1,25 @@
 # Node 随笔
 
+## 基础
+
+#### RPC调用
+> Remote Procedure Call（远程过程调用）
+
+**和Ajax有什么相同点？**
+* 都是两个计算机之间的网络通信
+* 需要双方预定一个数据格式
+
+**和Ajax有什么不同点**
+* Ajax使用DNS寻址服务，RPC不一定使用
+> 可能会在内网之间使用，如果用DNS就太“绕远”了。DNS寻址本身是用域名(http://xxx.com)去DNS换取IP后进行查询通信，RPC一般是用特有的服务通信(腾讯和阿里)，比如它是通过ID或者其他的标识取代(http://xxx.com)域名这种形式，到寻址服务器得到IP
+* 应用层协议一般不适用HTTP，而是使用二进制协议
+> RPC一般都是两个后端服务器通信，而二进制优势就是：更小的数据包体积，更快的解编码效率
+* 基于TCP或者UDP协议
+  TCP通信方式
+    * 单工通讯
+    * 半双工通信
+    * 全双工通信
+
 ## 问题记录
 
 #### node.js里面.readUInt16BE是什么意思，下面的数字是如何得来的？
@@ -21,7 +41,7 @@ console.log(buffer2.readUInt16LE(2)); // 16931
 
 > 注意 1byte(字节)=8bit(位/比特)
 
-var buffer2=Buffer.alloc(4; //创建了4个byte的buffer
+var buffer2=Buffer.alloc(4); //创建了4个byte的buffer
 buffer2[0]=0x3; // 给第一个byte存入 16进制的3， 以下类似
 buffer2[1]=0x4;
 buffer2[2]=0x23;
@@ -34,3 +54,10 @@ console.log(buffer2.readUInt16LE(0)); //这个就是从右边开始读16位然�
 readUInt16BE(1) 其中的参数 1 表示offset(偏移量)，也就是说偏移1位，那么取的值就是 00000100, 00100011, 0000010000100011转换为二进制就是 1059, 其它同理
 
 le 和be是指 little endian, big endian, 中文应该是大端小端， 搞出这种区别是因为cpu的设计者各自设计自己的，然后互相不屌对方， 没有统一起来，intel是小的， 摩托罗拉和IBM是大的，各自有自己的考虑和实现，放在nodejs这里大小端是为了方便和不同编码的数据交换。
+
+
+#### node.js里面当用 buffer 格式化一个json，比较麻烦，需要一个字段一个字段write，有没有类似js里面的JSON.stringify(json)的方法？
+
+答：
+社区内有库实现了，https://github.com/mafintosh/protocol-buffers
+当使用 encode 的时候就能方便的从一个 json 变为 buffer
