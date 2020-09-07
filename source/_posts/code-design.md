@@ -1,6 +1,6 @@
 ## Ramda 柯里化核心之 _curryN 实现
 
-**通常柯里化**
+#### 通常柯里化
 ```javascript
 function curry (fn) {
   return function f () {
@@ -17,7 +17,7 @@ function curry (fn) {
   } 
 }
 ```
-
+#### Ramda柯里化
 **辅助函数**
 ```javascript
 const _ = { '@@functional/placeholder': true }
