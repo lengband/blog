@@ -9,12 +9,15 @@ categories:
 ---
 
 # 集群环境
-1、https://labs.play-with-k8s.com/
 > 快速搭建集群环境(仅可用4小时)
-2、https://github.com/kubernetes/minikube
+1、https://labs.play-with-k8s.com/
+
+
+2、[Minikube](https://github.com/kubernetes/minikube)
+
 3、docker desktop 内置 (推荐)
 
-> 单纯使用容器，存在的问题
+#### 单纯使用容器，存在的问题
 * 怎么去管理这么多容器
 * 怎么能方便的横向扩展
 * 如果容器down了，怎么能自动恢复
@@ -46,7 +49,7 @@ categories:
 `kubectl get node -o yaml` 查看node list 的yaml 详细信息
 `kubectl get node -o json` 查看node list 的json 详细信息
 `kubectl get node --show-labels` 查看node list 的 label
-`kubectl descibe node <node-name>` 查看node的详情
+`kubectl describe node <node-name>` 查看node的详情
 
 设置label
 `kubectl label node <node-name> env=test` 给node设置label`env=test`
