@@ -1,7 +1,11 @@
 ---
-title: docker
+title: Docker
 date: 2020-05-04 14:29:46
-tags: Linux 容器
+tags:
+- Linux
+- 容器
+categories:
+- DevOpts
 ---
 
 # 安装 Docker

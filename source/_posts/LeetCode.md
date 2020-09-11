@@ -1,3 +1,9 @@
+---
+title: LeetCode
+date: 2020-06-01 10:29:46
+categories:
+- JS
+---
 
 ## 简单模式
 

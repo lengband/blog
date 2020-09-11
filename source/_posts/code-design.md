@@ -1,3 +1,12 @@
+---
+title: code-design
+date: 2020-09-1 10:29:46
+tags:
+- Ramda
+categories:
+- JS
+---
+
 ## Ramda 柯里化核心之 _curryN 实现
 
 #### 通常柯里化

@@ -1,3 +1,13 @@
+---
+title: K8S
+date: 2020-06-01 10:29:46
+tags:
+- Linux
+- 容器
+categories:
+- DevOpts
+---
+
 # 集群环境
 1、https://labs.play-with-k8s.com/
 > 快速搭建集群环境(仅可用4小时)
