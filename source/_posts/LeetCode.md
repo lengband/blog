@@ -152,3 +152,61 @@ var reverse = function(x) {
 };
 console.log(reverse(123))
 ```
+
+#### 实现一个单项链表，并实现反转
+**题目**
+输入: 1->2->3->4->5->NULL
+输出: 5->4->3->2->1->NULL
+
+**解题**
+```javascript
+function LinkedList() {
+    // 封装一个Node类, 用于保存每个节点信息
+    function Node(element) {
+      this.element = element
+      this.next = null
+    }
+    // 链表中的属性
+    this.length = 0
+    this.head = null
+    // 链表尾部追加元素方法
+    LinkedList.prototype.append = function (element) {
+        // 1.根据新元素创建节点
+        var newNode = new Node(element)
+        // 2.判断原来链表是否为空
+        if (this.head === null) { // 链表为空
+          this.head = newNode
+        } else { // 链表不为空
+            // 2.1.定义变量, 保存当前找到的节点
+            var current = this.head
+            while (current.next) {
+              current = current.next
+            }
+            // 2.2.找到最后一项, 将其next赋值为node
+            current.next = newNode
+        }
+        // 3.链表长度增加1
+        this.length++
+    }
+}
+```
+实现反转
+```javascript
+function myReverse (linkedList) {
+    // 1 拿到传参链表的head
+    var head = linkedList.head
+    // 2 边界判断 如果头结点是空 或者只有一个结点 那还反转个啥
+    if(head === null || head.next === null) return linkedList
+    // 3 用三个指针
+    var current = head
+    var pre = null 
+    var next = null
+    while(current != null) {
+      next = current.next // 先存储next
+      current.next = pre // 此时给next赋值的是上一个pre存储的值
+      pre = current // 存储当前的current，给下次循环使用
+      current = next // 继续下次循环
+    }
+    linkedList.head = pre
+}
+```
