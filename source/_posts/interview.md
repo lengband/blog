@@ -176,3 +176,54 @@ publisher.publish(pubsub)
 ```
 
 两种模式本质都是一样的，主要关键点都在于注册（添加到注册数组中）和触发（触发注册数组中的内容），只是订阅/发布模式对注册和触发进行了解耦。可以看到，使用订阅发布模式中发布者触发 publish 的时候，可以选择触发哪一些订阅者集合（因为 publish 参数传递了中间集合，可以定义多个 pubsub 集合），而观察者模式则只能触发所有的被观察对象。
+
+
+### 实现 add(1)(2)(3)
+
+```javascript
+const add = (a: number, b: number, c: number) => a + b + c;
+
+const adding = (...args: number[]) => args.reduce((pre, cur) => pre + cur, 0);
+
+//参数确定
+const curry = (fn: Function) => {
+  let args = [];
+
+  return function temp(...newArgs) {
+    args.push(...newArgs);
+    if (args.length === fn.length) {
+      const val = fn.apply(this, args);
+      args = [];
+      return val;
+    } else {
+      return temp;
+    }
+  };
+};
+
+//参数不确定
+const currying = (fn: Function) => {
+  let args = [];
+
+  return function temp(...newArgs) {
+    if (newArgs.length) {
+      args.push(...newArgs);
+      return temp;
+    } else {
+      const val = fn.apply(this, args);
+      args = [];
+      return val;
+    }
+  };
+};
+
+const curryAdd = curry(add);
+console.log(curryAdd(1)(2)(3)); // 6
+console.log(curryAdd(1, 2)(3)); // 6
+console.log(curryAdd(1)(2, 3)); // 6
+
+let addCurry = currying(adding);
+console.log(addCurry(1)(2)(3)(4, 5)()); //15
+console.log(addCurry(1)(2)(3, 4, 5)()); //15
+console.log(addCurry(1)(2, 3, 4, 5)()); //15
+```
