@@ -1,18 +1,43 @@
----
-title: 浏览器的优化方式
-date: 2020-12-22 21:05:46
-tags:
-- 浏览器
-- 优化
-categories:
-- 浏览器
----
+#### 2020 12 11 16 24 07 变为 2020年12月11日 16:24:07
+
+substring 实现思路:
+```javascript
+function formatTime (timestr) {
+  // console.time()
+  const timeStart = +new Date()
+  const year = timestr.substring(0, 4)
+  const month = timestr.substring(4, 6)
+  const date = timestr.substring(6, 8)
+  const hour = timestr.substring(8, 10)
+  const minute = timestr.substring(10, 12)
+  const second = timestr.substring(12, 14)
+  // console.log(+new Date - timeStart) // 0.005126953125 ms
+  console.log(timeStart, +new Date())
+  return `${year}年${month}月${date}日 ${hour}:${minute}:${second}`
+}
+formatTime('20201211162407')
+```
+正则 实现思路:
+```javascript
+function formatTime (timestr) {
+  console.time()
+  const reg = /(\d{4})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})/
+  const ret = reg.exec(timestr)
+  const [, year, month, date, hour, minte, second] = ret
+  console.timeEnd() // 0.44091796875ms
+  return `${year}年${month}月${date}日 ${hour}:${minute}:${second}`
+}
+formatTime('20201211162407')
+```
+结论：substring的执行速度高于正则
+
+
 #### 浏览器的优化方式
 > 这里指的是浏览器加在资源开始，不包含打包和构建相关
 
 1.减少请求次数
   - 尽量合并图片、CSS、JS(将CSS和JS放到外部文件中,可以实现做缓存)
-  - 小图片做base64
+  - 小图片做base64~~~~
   - 使用强缓存或者是协商缓存
   - 使用字体图标 iconfont 代替图片图标
   - 开启 keep-alive
@@ -36,7 +61,7 @@ categories:
  - 选择器越短越好，浏览器读取选择器，遵循的原则是从选择器的右边到左边读取 `#block .text p {`
  - 尽量使用高优先级的选择器，例如 ID 和类选择器
  - 避免使用通配符 *
- 
+
 12.如果没有兼容性的要求话，使用 flexbox 而不是较早的布局模型
 13.事件的节流与防抖(scroll 事件，resize 事件、鼠标事件（比如 mousemove、mouseover 等）、键盘事件（keyup、keydown 等）都存在被频繁触发的风险)
 14.服务端渲染(缺点:会增加服务器的负担)
