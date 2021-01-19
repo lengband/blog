@@ -47,21 +47,20 @@ mysql是一个开源的关系型数据库管理系统，现在是oracle公司旗
 ​	**简介：mysql的service服务管理与登录管理**
 
 - ```
-  查看mysql服务进程：ps -ef | grep mysql
+  查看mysql服务进程：
+    ps -ef | grep mysql
+    netstat -an|grep 3306
   ```
 
 - ```
-  service服务管理：cp -a mysql.server /etc/rc.d/init.d/mysql
+  启动命令：systemctl start mysql
+  关闭命令：systemctl stop mysql
+  重新启动命令：systemctl restart mysql
+  查看状态命令：systemctl status mysql
   ```
 
 - ```
-  启动命令：service mysql start
-  关闭命令：service mysql stop
-  重新启动命令：service mysql restart
-  查看状态命令：service mysql status
-  ```
-
-- ```
+  找出root初始密码：grep "password" /var/log/mysqld.log
   登录管理： ln -s /usr/local/mysql/bin/*  /bin
   登录命令：mysql -uroot -p
   ```
@@ -158,6 +157,11 @@ mysql是一个开源的关系型数据库管理系统，现在是oracle公司旗
    use 库名; 
   ```
 
+- 删除库
+```
+drop database 库名;
+```
+
 - 判断是否存在，如果不存在则创建数据库 db2
 
   ```
@@ -221,7 +225,9 @@ mysql是一个开源的关系型数据库管理系统，现在是oracle公司旗
             
             char的优缺点：存取速度比varchar更快，但是比varchar更占用空间
             varchar的优缺点：比char省空间。但是存取速度没有char快
-            
+            定长：比如设置 char(10)，那么'12'的字符串会被补齐， 结果为'0000000012'
+            定长：比如设置 varchar(10)，那么'12'的字符串不会被补齐，结果为'12'
+
             <5>时间型
             数据类型    字节数            格式                    备注
             date        3                yyyy-MM-dd              存储日期值
@@ -262,7 +268,7 @@ mysql是一个开源的关系型数据库管理系统，现在是oracle公司旗
   ```
 
   ```
-  create table 新表名 like 旧表名;
+  create table 新表名 like 旧表名; (同上，也是用于测试)
   ```
 
 -   约束条件：

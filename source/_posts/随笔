@@ -1,0 +1,8 @@
+---
+title: 随笔
+date: 2021-01-11 21:41:48
+tags:
+---
+
+查找文件 `find / -name "xxx"`
+查找目录 `find / -type d -name "xxx"`
