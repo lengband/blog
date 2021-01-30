@@ -9,6 +9,7 @@ categories:
 
 
 ## 第1章：mysql数据库的介绍
+> 由于博客排版问题，强烈建议观看 github 版
 
 ​[github地址](https://github.com/lengband/mysql_doc/blob/main/README.md)
 
