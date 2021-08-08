@@ -14,7 +14,7 @@ categories:
 * 运算器
 * 控制器
 
-![](./fengnuoyiman.jpg)
+![](./OS/fengnuoyiman.jpg)
 
 #### CPU
 冯诺依曼模型中运算器和控制器主要是 CPU 负责。为了方便计算较大的数值，CPU 每次可以计算多个字节的数据。
